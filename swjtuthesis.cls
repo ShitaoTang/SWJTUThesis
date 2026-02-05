@@ -508,4 +508,57 @@
   \makebox[\labelwidth][l]{[#1]}%
 }
 
+%% 数学定义、定理环境
+\RequirePackage{amsthm}
+
+\theoremstyle{plain}
+
+%% `\theoremstyle{style}` 命令修改定理环境的样式，Latex 内置的样式（style参数）有三种：
+
+%% plain（默认样式）：定理名称是正体，定理内容是斜体
+%% definition：定理名称和定理内容都是正体
+%% remark： 定理名称是斜体，定理内容是正体
+
+\newtheorem{theorem}{\indent 定理}[chapter]
+\newtheorem{lemma}[theorem]{\indent 引理}
+\newtheorem{proposition}[theorem]{\indent 命题}
+\newtheorem{corollary}[theorem]{\indent 推论}
+\newtheorem{definition}{\indent 定义}[chapter]
+\newtheorem{example}{\indent 例}[chapter]
+\newtheorem{remark}{\indent 注}[chapter]
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+
+%% 去除数学定义编号后面默认的"."
+\RequirePackage{xpatch}
+\makeatletter
+\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}
+
+% 解决中英文混排时行内公式和长英文单词超出右边距的问题
+\ifXeTeX
+  \RequirePackage[protrusion=true, expansion=false, tracking=false]{microtype}
+\else\ifLuaTeX
+  \RequirePackage[protrusion=true, expansion=true, tracking=false]{microtype}
+\fi\fi
+
+% 断行参数调整
+\tolerance=500                       
+\hbadness=500                        
+\emergencystretch=1.5em              
+\hfuzz=0.3pt                         
+\vfuzz=0.3pt                         
+
+% 连字符和断词参数
+\hyphenpenalty=100                   
+\exhyphenpenalty=100                 
+\doublehyphendemerits=10000          
+\finalhyphendemerits=5000            
+\adjdemerits=10000                   
+
+% 中英文混排断行优化
+\xeCJKsetup{
+  CJKecglue = {\hskip 0.15em plus 0.1em minus 0.05em}, % 中英文间弹性空白
+  CheckFullRight = true,             % 检查全角标点在行尾
+}
+
 \endinput
