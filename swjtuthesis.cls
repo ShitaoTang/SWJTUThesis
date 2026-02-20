@@ -645,8 +645,12 @@
   {2em} %% 缩进2字符
   {\bfseries}
   {}
-  {1em}
-  {}
+  { }
+  {                            % 标题格式定义
+    \thmname{#1}               % 环境名（如 Definition）
+    \thmnumber{#2}             % 编号
+    \thmnote{#3}               % 可选参数（不加括号）
+  }
 
 \theoremstyle{swjtuplain}
 
@@ -700,9 +704,5 @@
 \emergencystretch=1.5em   %% 允许单词间距拉伸
 \hfuzz=0.3pt
 \vfuzz=0.3pt
-
-\xeCJKsetup{
-  CheckFullRight = true,  %% 检查全角标点在行尾
-}
 
 \endinput
