@@ -384,7 +384,7 @@
         \begin{minipage}{12cm} 
           \centering                
           \makebox[6em][r]{Discipline~} \swjtu@fillinblank{11em}{\swjtu@enmajorFirst} \par
-        \ifx\swjtu@enmajorSecond\@empty \else
+        \if\relax\detokenize\expandafter{\swjtu@enmajorSecond}\relax \else
           \makebox[6em][r]{} \swjtu@fillinblank{11em}{\swjtu@enmajorSecond} \par
         \fi
           \makebox[6em][r]{Student ID~} \swjtu@fillinblank{11em}{\swjtu@studentid} \par
